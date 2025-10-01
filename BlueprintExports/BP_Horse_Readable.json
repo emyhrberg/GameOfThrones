@@ -1,0 +1,53 @@
+{
+	"name": "BP_Horse",
+	"nodes": [
+		{
+			"title": "Event Ride\nFrom BPI Mount",
+			"children": [
+				{
+					"pin": "then",
+					"title": "Set Actor Hidden In Game\nTarget is Actor  : self is Get Player Character",
+					"children": [
+						{
+							"pin": "then",
+							"title": "Set isRiding?",
+							"children": [
+								{
+									"pin": "then",
+									"title": "Possess\nTarget is Controller  : self is Get Player Controller, InPawn is Self-Reference",
+									"children": [
+										{
+											"pin": "then",
+											"title": "Set Visibility\nTarget is Scene Component  : self is Get Fake Player Riding",
+											"children": []
+										}
+									]
+								}
+							]
+						}
+					]
+				}
+			]
+		},
+		{
+			"title": "Event Primary Thumbstick\nFrom BPI Touch Interface",
+			"children": [
+				{
+					"pin": "then",
+					"title": "Move\nTarget is BP Horse",
+					"children": []
+				}
+			]
+		},
+		{
+			"title": "Event Secondary Thumbstick\nFrom BPI Touch Interface",
+			"children": [
+				{
+					"pin": "then",
+					"title": "Aim\nTarget is BP Horse",
+					"children": []
+				}
+			]
+		}
+	]
+}

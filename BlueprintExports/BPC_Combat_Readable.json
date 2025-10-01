@@ -1,0 +1,132 @@
+{
+	"name": "BPC_Combat",
+	"nodes": [
+		{
+			"title": "Event Tick",
+			"children": [
+				{
+					"pin": "then",
+					"title": "Get",
+					"children": [
+						{
+							"pin": "then",
+							"title": "Cast To BP_Enemy",
+							"children": [
+								{
+									"pin": "then",
+									"title": "Branch  : Condition is Get isDead?",
+									"children": [
+										{
+											"pin": "then",
+											"title": "Set isTargetLocked?",
+											"children": [
+												{
+													"pin": "then",
+													"title": "Set movementDirection",
+													"children": [
+														{
+															"pin": "then",
+															"title": "Set Target Lock Actor",
+															"children": [
+																{
+																	"pin": "then",
+																	"title": "Set bOrientRotationToMovement  : self is Get CharacterMovement",
+																	"children": [
+																		{
+																			"pin": "then",
+																			"title": "Set bUseControllerDesiredRotation  : self is Get CharacterMovement",
+																			"children": [
+																				{
+																					"pin": "then",
+																					"title": "Destroy Actor\nTarget is Actor  : self is Get Target Lock Widget",
+																					"children": []
+																				}
+																			]
+																		}
+																	]
+																}
+															]
+														}
+													]
+												}
+											]
+										},
+										{
+											"pin": "else",
+											"title": "Set Control Rotation\nTarget is Controller  : self is Get Controller\nTarget is Pawn, NewRotation is Make Rotator",
+											"children": []
+										}
+									]
+								}
+							]
+						}
+					]
+				}
+			]
+		},
+		{
+			"title": "Event Begin Play",
+			"children": [
+				{
+					"pin": "then",
+					"title": "Cast To BP_ThirdPersonCharacter  : Object is Get Owner\nTarget is Actor Component",
+					"children": [
+						{
+							"pin": "then",
+							"title": "Set Player BP",
+							"children": []
+						}
+					]
+				}
+			]
+		},
+		{
+			"title": "Begin Damage Trace\nCustom Event",
+			"children": [
+				{
+					"pin": "then",
+					"title": "Set Timer by Event",
+					"children": []
+				}
+			]
+		},
+		{
+			"title": "Damage Trace\nCustom Event",
+			"children": [
+				{
+					"pin": "then",
+					"title": "Sphere Trace For Objects  : Start is Make Vector, End is Get World Location\nTarget is Scene Component, ObjectTypes is Make Array",
+					"children": [
+						{
+							"pin": "then",
+							"title": "Branch",
+							"children": [
+								{
+									"pin": "then",
+									"title": "Apply Damage  : DamagedActor is Break Hit Result, BaseDamage is Get daggerDamage",
+									"children": []
+								}
+							]
+						}
+					]
+				}
+			]
+		},
+		{
+			"title": "End Damage Trace\nCustom Event",
+			"children": [
+				{
+					"pin": "then",
+					"title": "Branch  : Condition is Is Valid Timer Handle",
+					"children": [
+						{
+							"pin": "then",
+							"title": "Clear and Invalidate Timer by Handle  : Handle is Reroute Node",
+							"children": []
+						}
+					]
+				}
+			]
+		}
+	]
+}

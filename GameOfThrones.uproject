@@ -61,6 +61,10 @@
 		{
 			"Name": "Mover",
 			"Enabled": true
+		},
+		{
+			"Name": "BlueprintExporter",
+			"Enabled": true
 		}
 	]
 }
